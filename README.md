@@ -186,9 +186,9 @@ El proyecto incluye la clase `JwtSecretGenerator`, ubicada en:
 src/main/java/biblioteca/biblioteca/JwtSecretGenerator.java
 ```
 
-Esta clase genera un secreto aleatorio compatible con el algoritmo HMAC-SHA256 y lo codifica en Base64.
+Esta clase genera una cadena aleatoria compatible con el algoritmo HMAC-SHA256 y lo codifica en Base64.
 
-Para generar un nuevo secreto:
+Para generar una nueva clave:
 
 1. Ejecuta la clase `JwtSecretGenerator` desde IntelliJ IDEA.
 2. Copia el valor generado en la consola.
