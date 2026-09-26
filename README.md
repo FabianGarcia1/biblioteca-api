@@ -167,16 +167,83 @@ mvnw.cmd test
 
 La aplicación utiliza variables de entorno para mantener fuera del código fuente información sensible como las credenciales de la base de datos y el secreto utilizado para JWT.
 
-Ejemplo de configuración:
+### Variables de entorno
 
-```properties
-spring.datasource.username=root
-spring.datasource.password=${DB_PASSWORD}
+Antes de ejecutar la aplicación, configura las siguientes variables:
 
-jwt.secret=${JWT_SECRET}
+```text
+DB_PASSWORD= ${DB_PASSWORD}
+JWT_SECRET= ${JWT_SECRET}
 ```
 
-Los valores reales deben configurarse en el entorno local y no deben subirse al repositorio.
+Los valores reales no deben subirse al repositorio.
+
+### Generar el secreto JWT
+
+El proyecto incluye la clase `JwtSecretGenerator`, ubicada en:
+
+```text
+src/main/java/biblioteca/biblioteca/JwtSecretGenerator.java
+```
+
+Esta clase genera un secreto aleatorio compatible con el algoritmo HMAC-SHA256 y lo codifica en Base64.
+
+Para generar un nuevo secreto:
+
+1. Ejecuta la clase `JwtSecretGenerator` desde IntelliJ IDEA.
+2. Copia el valor generado en la consola.
+3. Configúralo como valor de `JWT_SECRET`.
+
+Ejemplo:
+
+```text
+JWT_SECRET= ${clave generada}
+```
+
+Cada instalación del proyecto debe utilizar su propio secreto JWT.
+
+### Base de datos
+
+La aplicación utiliza MySQL.
+
+Configuración utilizada:
+
+```text
+Host: localhost
+Port: 3306
+Database: biblioteca_bd
+Username: root
+```
+
+La contraseña se configura mediante la variable de entorno:
+
+```text
+DB_PASSWORD
+```
+
+La aplicación está configurada para crear la base de datos si no existe y actualizar el esquema mediante Hibernate.
+
+### Ejecutar la aplicación
+
+Una vez configuradas las variables de entorno, ejecuta:
+
+**Windows:**
+
+```bash
+mvnw.cmd spring-boot:run
+```
+
+**Linux/macOS:**
+
+```bash
+./mvnw spring-boot:run
+```
+
+La API estará disponible en:
+
+```text
+http://localhost:8080
+```
 
 ## Ejecución local
 
